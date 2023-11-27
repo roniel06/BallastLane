@@ -11,7 +11,6 @@ namespace BallastLane.Business.Services
 
     public class UserService : BaseService<User>, IUserService
     {
-        private readonly IUserRepository _userRepository;
         public UserService(IUserRepository userRepository) : base(userRepository)
         {
         }

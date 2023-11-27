@@ -1,4 +1,5 @@
-﻿using BallastLane.Infrastructure.Models;
+﻿using BallastLane.Infrastructure.Context.Configurations;
+using BallastLane.Infrastructure.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace BallastLane.Infrastructure.Context
@@ -11,6 +12,11 @@ namespace BallastLane.Infrastructure.Context
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlite("Filename=ballastlane.db");
+        }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.ApplyConfiguration(new UserEFConfigurations());
         }
 
         public DbSet<User> Users { get; set; }

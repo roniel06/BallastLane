@@ -1,19 +1,16 @@
-﻿using BallastLane.Infrastructure.Models;
+﻿using BallastLane.Api.Controllers.Core;
+using BallastLane.Business.Services;
+using BallastLane.Infrastructure.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BallastLane.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsersController : ControllerBase
+    public class UsersController : BaseController<User, IUserService>
     {
-
-        [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public UsersController(IUserService service) : base(service)
         {
-
-            return Ok(new List<User>());
         }
-
     }
 }
