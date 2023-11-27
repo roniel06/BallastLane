@@ -23,12 +23,12 @@ namespace BallastLane.Test.Systems.Repository
 
 
         [Fact]
-        public async void CreateAsync_ShouldReturnCreatedEntity()
+        public async Task CreateAsync_ShouldReturnCreatedEntity()
         {
             // Arrange
             var fixture = new Fixture();
             var user = fixture.Create<User>();
-
+            user.IsDeleted = false;
 
             // Act
             var result = await _sut.CreateAsync(user);
@@ -40,7 +40,7 @@ namespace BallastLane.Test.Systems.Repository
         }
 
         [Fact]
-        public async void GetAll_ShouldReturnAll_NonDeleted_Entities()
+        public async Task GetAll_ShouldReturnAll_NonDeleted_Entities()
         {
             // Arrange
             var fixture = new Fixture();
@@ -48,8 +48,10 @@ namespace BallastLane.Test.Systems.Repository
 
 
             // Act
-            users.Select(async user => await _sut.CreateAsync(user));
-
+            foreach (var user in users)
+            {
+                await _sut.CreateAsync(user);
+            }
 
             // Assert
             var result = await _sut.GetAllAsync();
@@ -58,7 +60,7 @@ namespace BallastLane.Test.Systems.Repository
         }
 
         [Fact]
-        public async void GetById_ShouldReturn_Created_Record()
+        public async Task GetById_ShouldReturn_Created_Record()
         {
             // Arrange
             var fixture = new Fixture();
@@ -76,12 +78,12 @@ namespace BallastLane.Test.Systems.Repository
 
 
         [Fact]
-        public async void Update_ShouldReturn_Updated_Record()
+        public async Task Update_ShouldReturn_Updated_Record()
         {
             // Arrange
             var fixture = new Fixture();
             var user = fixture.Create<User>();
-
+            user.IsDeleted = false;
 
             // Act 
             var createdUser = await _sut.CreateAsync(user);
@@ -96,7 +98,7 @@ namespace BallastLane.Test.Systems.Repository
         }
 
         [Fact]
-        public async void Delete_ShouldReturn_True_IfDeleted()
+        public async Task Delete_ShouldReturn_True_IfDeleted()
         {
             // Arrange
             var fixture = new Fixture();
@@ -114,11 +116,9 @@ namespace BallastLane.Test.Systems.Repository
         [Theory]
         [InlineData(0)]
         [InlineData(25)]
-        public async void Delete_ShouldReturn_False_IfRecord_DoesntExist(int id)
+        public async Task Delete_ShouldReturn_False_IfRecord_DoesntExist(int id)
         {
             // Arrange
-            var fixture = new Fixture();
-            var user = fixture.Create<User>();
 
             // Act 
             var updatedUser = await _sut.DeleteAsync(id);
@@ -126,5 +126,6 @@ namespace BallastLane.Test.Systems.Repository
             // Assert
             updatedUser.Should().BeFalse();
         }
+
     }
 }
