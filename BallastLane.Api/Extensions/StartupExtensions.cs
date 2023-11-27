@@ -13,6 +13,7 @@ namespace BallastLane.Api.Extensions
         public static void ConfigureRepositories(this IServiceCollection services)
         {
             services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<INoteRepository, NoteRepository>();
         }
 
         /// <summary>
@@ -22,6 +23,7 @@ namespace BallastLane.Api.Extensions
         public static void ConfigureServices(this IServiceCollection services)
         {
             services.AddTransient<IUserService, UserService>();
+            services.AddTransient<INoteService, NoteService>();
         }
 
 

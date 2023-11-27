@@ -13,6 +13,7 @@ namespace BallastLane.Infrastructure.Context.Configurations
             builder.Property(x=> x.LastName).HasMaxLength(100).IsRequired();
             builder.Property(x => x.Address).HasMaxLength(500);
             builder.Property(x=> x.DateOfBirth).IsRequired();
+            builder.HasMany(x => x.Notes);
             builder.HasQueryFilter(x => !x.IsDeleted);
         }
     }

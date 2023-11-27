@@ -123,5 +123,11 @@ namespace BallastLane.Test.Systems.Controllers
             // Assert
             result.StatusCode.Should().Be(400);
         }
+
+        [Fact]
+        public async void GetUser_IncludeNotes_ShouldIncludeNotes()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

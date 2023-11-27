@@ -27,8 +27,10 @@ namespace BallastLane.Test.Systems.Repository
         {
             // Arrange
             var fixture = new Fixture();
-            var user = fixture.Create<User>();
+            var user = fixture.Build<User>().With(x => x.Id, 0).Create();
             user.IsDeleted = false;
+            user.Notes = null;
+            user.Id = 0;
 
             // Act
             var result = await _sut.CreateAsync(user);
@@ -44,7 +46,7 @@ namespace BallastLane.Test.Systems.Repository
         {
             // Arrange
             var fixture = new Fixture();
-            var users = fixture.CreateMany<User>(10);
+            var users = fixture.Build<User>().With(x => x.Id, 0).Without(x => x.Notes).CreateMany(10);
 
 
             // Act
@@ -64,14 +66,15 @@ namespace BallastLane.Test.Systems.Repository
         {
             // Arrange
             var fixture = new Fixture();
-            var user = fixture.Create<User>();
-
+            var user = fixture.Build<User>().With(x => x.Id, 0).Without(x => x.Notes).Create();
+            user.IsDeleted = false;
 
             // Act 
             await _sut.CreateAsync(user);
+            var result = await _sut.GetByIdAsync(user.Id);
+
 
             // Assert
-            var result = await _sut.GetByIdAsync(user.Id);
             result.Should().NotBeNull();
             result.Should().BeEquivalentTo(user);
         }
@@ -82,8 +85,10 @@ namespace BallastLane.Test.Systems.Repository
         {
             // Arrange
             var fixture = new Fixture();
-            var user = fixture.Create<User>();
+            var user = fixture.Build<User>().With(x => x.Id, 0).Without(x => x.Notes).Create();
             user.IsDeleted = false;
+
+
 
             // Act 
             var createdUser = await _sut.CreateAsync(user);
@@ -102,8 +107,10 @@ namespace BallastLane.Test.Systems.Repository
         {
             // Arrange
             var fixture = new Fixture();
-            var user = fixture.Create<User>();
+            var user = fixture.Build<User>().With(x => x.Id, 0).Create();
             user.IsDeleted = false;
+            user.Notes = null;
+
 
             // Act 
             var createdUser = await _sut.CreateAsync(user);

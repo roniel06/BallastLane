@@ -42,4 +42,10 @@ public interface IRepository<T> where T : BaseModel, new()
     /// <param name="id">The record id.</param>
     /// <returns></returns>
     Task<T?> GetByIdAsync(int id);
+
+    /// <summary>
+    /// Gets the queryable
+    /// </summary>
+    /// <returns></returns>
+    IQueryable<T> GetQueryable();
 }

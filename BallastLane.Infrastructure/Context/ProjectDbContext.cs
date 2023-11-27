@@ -17,8 +17,10 @@ namespace BallastLane.Infrastructure.Context
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfiguration(new UserEFConfigurations());
+            modelBuilder.ApplyConfiguration(new NotesEFConfiguration());
         }
 
         public DbSet<User> Users { get; set; }
+        public DbSet<Note> Notes { get; set; }
     }
 }

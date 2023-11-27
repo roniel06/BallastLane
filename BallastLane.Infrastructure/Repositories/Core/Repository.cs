@@ -33,7 +33,7 @@ public class Repository<T> : IRepository<T> where T : BaseModel, new()
         catch (Exception ex)
         {
             _logger.LogError(ex.Message, ex);
-            return null;
+            throw;
         }
     }
 
@@ -68,6 +68,12 @@ public class Repository<T> : IRepository<T> where T : BaseModel, new()
     public async Task<T?> GetByIdAsync(int id)
     {
         return await _dbSet.FindAsync(id);
+    }
+
+    ///<inheritdoc/>
+    public IQueryable<T> GetQueryable()
+    {
+        return _dbSet.AsQueryable();
     }
 
     ///<inheritdoc/>

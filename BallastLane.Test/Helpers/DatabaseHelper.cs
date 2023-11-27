@@ -11,6 +11,7 @@ namespace BallastLane.Test.Helpers
 
             var dbContext = new ProjectDbContext(options);
             dbContext.Database.OpenConnection();
+            dbContext.Database.Migrate();
             dbContext.Database.EnsureCreated();
             return dbContext;
         }

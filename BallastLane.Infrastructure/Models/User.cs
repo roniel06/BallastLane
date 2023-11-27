@@ -9,5 +9,6 @@ namespace BallastLane.Infrastructure.Models
         public DateTime DateOfBirth { get; set; }
         public string PhoneNumber { get; set; }
         public string Address { get; set; }
+        public virtual ICollection<Note>? Notes { get; set; }
     }
 }
