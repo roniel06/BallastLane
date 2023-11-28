@@ -41,5 +41,17 @@ namespace BallastLane.Api.Extensions
             }
         }
 
+        public static void ConfigureCors(this IServiceCollection services)
+        {
+
+            services.AddCors(o => o.AddPolicy("CorsPolicy", builder =>
+         {
+             builder.WithOrigins("http://localhost:5173")
+                    .AllowAnyMethod()
+                    .AllowAnyHeader();
+         }));
+
+        }
+
     }
 }
