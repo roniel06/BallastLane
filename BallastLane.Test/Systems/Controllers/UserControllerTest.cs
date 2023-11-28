@@ -129,14 +129,14 @@ namespace BallastLane.Test.Systems.Controllers
         {
             // Arrange
             var fixture = new Fixture();
-            var user = fixture.Build<User>().With(x => x.Id, 0).Create();
+            var user = fixture.Build<User>().Create();
             user.IsDeleted = false;
 
             _userService.Setup(x => x.CreateAsync(It.IsAny<User>())).ReturnsAsync(user);
             _userService.Setup(x => x.GetUserWithNotes(It.IsAny<int>())).ReturnsAsync(user);
 
             // Act
-            var result = (OkObjectResult)await _sut.GetUserWithNotes(true, user.Id);
+            var result = (OkObjectResult)await _sut.GetUserWithNotes(user.Id);
 
 
             // Assert
@@ -148,9 +148,9 @@ namespace BallastLane.Test.Systems.Controllers
 
 
         [Theory]
-        [InlineData(true, 254)]
-        [InlineData(false, 336)]
-        public async void GetUser_IncludeNotes_ShouldReturnNoContent_IfNoUserExist(bool includeNotes, int id)
+        [InlineData(254)]
+        [InlineData(336)]
+        public async void GetUser_IncludeNotes_ShouldReturnNoContent_IfNoUserExist(int id)
         {
             // Arrange
             var fixture = new Fixture();
@@ -160,7 +160,7 @@ namespace BallastLane.Test.Systems.Controllers
             _userService.Setup(x => x.GetUserWithNotes(It.IsAny<int>())).ReturnsAsync(() => null);
 
             // Act
-            var result = (NoContentResult)await _sut.GetUserWithNotes(includeNotes, id);
+            var result = (NoContentResult)await _sut.GetUserWithNotes(id);
 
 
             // Assert

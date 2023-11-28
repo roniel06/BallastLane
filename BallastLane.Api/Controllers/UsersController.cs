@@ -2,7 +2,6 @@
 using BallastLane.Business.Services;
 using BallastLane.Infrastructure.Models;
 using Microsoft.AspNetCore.Mvc;
-using System.ComponentModel.DataAnnotations;
 
 namespace BallastLane.Api.Controllers
 {
@@ -16,10 +15,10 @@ namespace BallastLane.Api.Controllers
             _userService = service;
         }
 
-        [HttpGet("GetUserWithNotes/{includeNotes}/{id}")]
-        public async Task<IActionResult> GetUserWithNotes([FromRoute, Required] bool includeNotes, int id)
+        [HttpGet("GetUserWithNotes/{id}")]
+        public async Task<IActionResult> GetUserWithNotes(int id)
         {
-            if (includeNotes)
+            if (id > 0)
             {
                 var result = await _userService.GetUserWithNotes(id);
                 if (result != null)
@@ -28,7 +27,7 @@ namespace BallastLane.Api.Controllers
                 }
                 return NoContent();
             }
-            return await base.GetById(id);
+            return BadRequest();
         }
     }
 }
