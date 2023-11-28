@@ -9,10 +9,7 @@ namespace BallastLane.Infrastructure.Context
         public ProjectDbContext(DbContextOptions<ProjectDbContext> options) : base(options)
         {
         }
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlite("Filename=ballastlane.db");
-        }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

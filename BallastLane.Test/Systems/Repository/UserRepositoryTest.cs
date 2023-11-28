@@ -5,6 +5,7 @@ using BallastLane.Infrastructure.Repositories;
 using BallastLane.Infrastructure.Repositories.Core;
 using BallastLane.Test.Helpers;
 using FluentAssertions;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Moq;
 
@@ -30,7 +31,6 @@ namespace BallastLane.Test.Systems.Repository
             var user = fixture.Build<User>().With(x => x.Id, 0).Create();
             user.IsDeleted = false;
             user.Notes = null;
-            user.Id = 0;
 
             // Act
             var result = await _sut.CreateAsync(user);
@@ -133,6 +133,5 @@ namespace BallastLane.Test.Systems.Repository
             // Assert
             updatedUser.Should().BeFalse();
         }
-
     }
 }

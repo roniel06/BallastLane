@@ -33,7 +33,7 @@ namespace BallastLane.Api.Extensions
         /// <param name="services"></param>
         public static void ConfigureDbContext(this IServiceCollection services)
         {
-            services.AddDbContext<ProjectDbContext>();
+            services.AddSqlite<ProjectDbContext>("Filename=ballastlane.db");
             using (var provider = services.BuildServiceProvider())
             {
                 var ctx = provider.GetService<ProjectDbContext>();

@@ -6,12 +6,12 @@ namespace BallastLane.Test.Helpers
     {
         public static ProjectDbContext CreateDbContex()
         {
+
             var options = new DbContextOptionsBuilder<ProjectDbContext>()
-                .UseSqlite("DataSource=:memory;").Options;
+                .UseSqlite("DataSource=:memory:").Options;
 
             var dbContext = new ProjectDbContext(options);
             dbContext.Database.OpenConnection();
-            dbContext.Database.Migrate();
             dbContext.Database.EnsureCreated();
             return dbContext;
         }

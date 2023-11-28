@@ -7,7 +7,7 @@ namespace BallastLane.Api.Controllers.Core
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BaseController<TEntity, TService> : ControllerBase
+    public abstract class BaseController<TEntity, TService> : ControllerBase
         where TEntity : BaseModel, new()
         where TService : IBaseService<TEntity>
     {
@@ -25,7 +25,7 @@ namespace BallastLane.Api.Controllers.Core
         /// <param name="entity"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<IActionResult> Create(TEntity entity)
+        public virtual async Task<IActionResult> Create(TEntity entity)
         {
             if (entity != null && ModelState.IsValid)
             {
@@ -41,7 +41,7 @@ namespace BallastLane.Api.Controllers.Core
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public virtual async Task<IActionResult> GetAll()
         {
             var result = await _service.GetAllAsync();
             if (result.Count() > 0) return Ok(result);
@@ -54,7 +54,7 @@ namespace BallastLane.Api.Controllers.Core
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById([Required] int id)
+        public virtual async Task<IActionResult> GetById([Required] int id)
         {
             if (id > 0)
             {
@@ -71,7 +71,7 @@ namespace BallastLane.Api.Controllers.Core
         /// <param name="entity"></param>
         /// <returns></returns>
         [HttpPut]
-        public async Task<IActionResult> Update(TEntity entity)
+        public virtual async Task<IActionResult> Update(TEntity entity)
         {
             if(entity != null && ModelState.IsValid)
             {
@@ -88,7 +88,7 @@ namespace BallastLane.Api.Controllers.Core
         /// <param name="id">The id of the record</param>
         /// <returns></returns>
         [HttpDelete]
-        public async Task<IActionResult> Delete(int id)
+        public virtual async Task<IActionResult> Delete(int id)
         {
             if (id > 0)
             {

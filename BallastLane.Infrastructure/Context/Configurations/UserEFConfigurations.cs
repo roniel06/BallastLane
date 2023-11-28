@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace BallastLane.Infrastructure.Context.Configurations
 {
-    internal class UserEFConfigurations : IEntityTypeConfiguration<User>
+    public class UserEFConfigurations : IEntityTypeConfiguration<User>
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {

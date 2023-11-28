@@ -57,7 +57,7 @@ namespace BallastLane.Test.Systems.Controllers
             _userService.Setup(x => x.GetByIdAsync(user.Id)).ReturnsAsync(user);
 
             // Act
-            var result = (OkObjectResult) await _sut.GetById(user.Id);
+            var result = (OkObjectResult)await _sut.GetById(user.Id);
 
 
             // Assert
@@ -72,17 +72,17 @@ namespace BallastLane.Test.Systems.Controllers
             // Arrange
             var fixture = new Fixture();
             var user = fixture.Create<User>();
-            
+
             _userService.Setup(x => x.UpdateAsync(It.IsAny<User>())).ReturnsAsync(user);
 
             // Act
-            var result = await _sut.Update(user); 
+            var result = await _sut.Update(user);
 
             // Assert
             var okResult = Assert.IsType<OkObjectResult>(result);
             var updatedUser = Assert.IsType<User>(okResult.Value);
 
-            updatedUser.Name.Should().Be(user.Name); 
+            updatedUser.Name.Should().Be(user.Name);
             updatedUser.LastName.Should().Be(user.LastName);
 
 
@@ -127,7 +127,44 @@ namespace BallastLane.Test.Systems.Controllers
         [Fact]
         public async void GetUser_IncludeNotes_ShouldIncludeNotes()
         {
-            throw new NotImplementedException();
+            // Arrange
+            var fixture = new Fixture();
+            var user = fixture.Build<User>().With(x => x.Id, 0).Create();
+            user.IsDeleted = false;
+
+            _userService.Setup(x => x.CreateAsync(It.IsAny<User>())).ReturnsAsync(user);
+            _userService.Setup(x => x.GetUserWithNotes(It.IsAny<int>())).ReturnsAsync(user);
+
+            // Act
+            var result = (OkObjectResult)await _sut.GetUserWithNotes(true, user.Id);
+
+
+            // Assert
+            result.StatusCode.Should().Be(200);
+            result.Value.Should().BeOfType<User>();
+            var record = result.Value.Should().BeAssignableTo<User>().Subject;
+            record.Notes.Count.Should().BeGreaterThan(0);
+        }
+
+
+        [Theory]
+        [InlineData(true, 254)]
+        [InlineData(false, 336)]
+        public async void GetUser_IncludeNotes_ShouldReturnNoContent_IfNoUserExist(bool includeNotes, int id)
+        {
+            // Arrange
+            var fixture = new Fixture();
+     
+
+            _userService.Setup(x => x.CreateAsync(It.IsAny<User>())).ReturnsAsync(() => null);
+            _userService.Setup(x => x.GetUserWithNotes(It.IsAny<int>())).ReturnsAsync(() => null);
+
+            // Act
+            var result = (NoContentResult)await _sut.GetUserWithNotes(includeNotes, id);
+
+
+            // Assert
+            result.StatusCode.Should().Be(204);
         }
     }
 }
