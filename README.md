@@ -61,7 +61,7 @@ Make sure to take the port provided by the host
 cd BallastLane.Client
 ```
 
-go to ```bash BallastLane.Client\src\httpServices\httpService.js ```
+go to ```BallastLane.Client\src\httpServices\httpService.js ```
 and change the port of baseUrl to the one provided by the backend project.
 
 Now Execute
