@@ -8,7 +8,7 @@ The note should have Title, Text, Date.
 I should have Endpoints to Create, Update, Obtain, Delete users and Notes.
 
 ## Technologies Used
-[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) ![](https://img.shields.io/badge/.NET_Core-blue?logo=.net) ![](https://img.shields.io/badge/Entity_Framework_Core-purple?logo=.net) ![](https://img.shields.io/badge/xUnit-orange?logo=xunit) ![](https://img.shields.io/badge/-ReactJs-61DAFB?logo=react)
+[![License: GNU](https://img.shields.io/badge/License-GNU%20GPL-blue)](https://www.gnu.org/licenses/gpl-3.0) ![](https://img.shields.io/badge/.NET_Core-blue?logo=.net) ![](https://img.shields.io/badge/Entity_Framework_Core-purple?logo=.net) ![](https://img.shields.io/badge/xUnit-orange?logo=xunit) ![](https://img.shields.io/badge/-ReactJs-61DAFB?logo=react)
 - .NET 8 - A free, cross-platform, open-source framework for building modern cloud-based and internet-connected applications.
 - Entity Framework Core - A modern object-database mapper for .NET that provides a clean and elegant way to access relational databases.
 - xUnit - A free, open-source, and community-focused unit testing tool for the .NET Framework.
