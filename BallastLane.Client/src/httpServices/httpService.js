@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'https:localhost:32770/api',
+  baseURL: 'https://localhost:32772/api',
 });
 
 const get = async (endpoint, params = {}) => {

@@ -69,6 +69,9 @@ const UserTable = () => {
 
     return (
         <>
+        <div className="grid grid-cols-3">
+            <p className="text-black text-lg">Welcome to the User Notes App</p>
+        </div>
             <Link
                 to={'/user/create'}
                 className="bg-blue-500 text-white px-4 py-2 rounded float-right mb-5">

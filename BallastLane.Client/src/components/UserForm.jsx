@@ -48,7 +48,7 @@ const UserForm = ({ user, onSubmit }) => {
       </div>
       <div className="mb-4">
         <label className='text-gray-800'>Date of Birth</label>
-        <DatePicker className='mt-2 p-3 bg-gray-200' selected={userData?.dateOfBirth} onChange={(e) => { handleOnChange({ target: { name: "dateOfBirth", value: new Date(e) } }) }} name='dateOfBirth' />
+        <DatePicker showMonthDropdown showYearDropdown scrollableMonthYearDropdown scrollableYearDropdown yearDropdownItemNumber={100} className='mt-2 p-3 bg-gray-200' selected={userData?.dateOfBirth} onChange={(e) => { handleOnChange({ target: { name: "dateOfBirth", value: new Date(e) } }) }} name='dateOfBirth' />
       </div>
 
       <div className="mb-4">

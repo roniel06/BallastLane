@@ -1,16 +1,31 @@
 import React from 'react'
-import { Outlet, useLocation } from 'react-router-dom'
+import { Outlet } from 'react-router-dom'
 
 const Main = () => {
-    const location = useLocation();
     return (
-        <div className="container mx-auto p-4">
-            <h1 className="text-3xl font-bold mb-4">Users and Notes App</h1>
-            <div className='mt-5'>
-                <Outlet />
-            </div>
+        <>
+            <div className="min-h-full">
+                <nav className="bg-gray-800">
+                    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                        <div className="flex h-16 items-center justify-between">
+                            <div className="flex items-center">
+                                <div className="flex-shrink-0">
+                                    <h2 className='text-white text-lg'>BallastLane</h2>
+                                </div>
 
-        </div>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+            <main>
+                <div className='mt-5 m-8'>
+                    <Outlet />
+                </div>
+            </main>
+
+
+        </>
     )
 }
 
