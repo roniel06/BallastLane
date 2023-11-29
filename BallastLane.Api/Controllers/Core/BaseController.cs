@@ -87,7 +87,7 @@ namespace BallastLane.Api.Controllers.Core
         /// </summary>
         /// <param name="id">The id of the record</param>
         /// <returns></returns>
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public virtual async Task<IActionResult> Delete(int id)
         {
             if (id > 0)

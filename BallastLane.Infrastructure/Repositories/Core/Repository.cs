@@ -46,6 +46,7 @@ public class Repository<T> : IRepository<T> where T : BaseModel, new()
             try
             {
                 record.IsDeleted = true;
+                record.DeletedAt = DateTime.UtcNow;
                 return await _dbContext.SaveChangesAsync() > 0;
             }
             catch (Exception ex)
@@ -81,6 +82,7 @@ public class Repository<T> : IRepository<T> where T : BaseModel, new()
     {
         try
         {
+            model.UpdatedAt= DateTime.UtcNow;
             _dbSet.Update(model);
             if (await _dbContext.SaveChangesAsync() > 0)
             {

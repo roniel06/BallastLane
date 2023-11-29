@@ -37,7 +37,7 @@ namespace BallastLane.Api.Extensions
             using (var provider = services.BuildServiceProvider())
             {
                 var ctx = provider.GetService<ProjectDbContext>();
-                if (ctx != null) ctx.Database.EnsureCreated();
+                if (ctx != null) { ctx.Database.EnsureCreated(); }
             }
         }
 
