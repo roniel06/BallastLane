@@ -37,8 +37,20 @@ namespace BallastLane.Api.Extensions
             using (var provider = services.BuildServiceProvider())
             {
                 var ctx = provider.GetService<ProjectDbContext>();
-                if (ctx != null) ctx.Database.EnsureCreated();
+                if (ctx != null) { ctx.Database.EnsureCreated(); }
             }
+        }
+
+        public static void ConfigureCors(this IServiceCollection services)
+        {
+
+            services.AddCors(o => o.AddPolicy("CorsPolicy", builder =>
+         {
+             builder.WithOrigins("http://localhost:5173")
+                    .AllowAnyMethod()
+                    .AllowAnyHeader();
+         }));
+
         }
 
     }
